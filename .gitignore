@@ -1,0 +1,19 @@
+# .NET / C#
+bin/
+obj/
+*.user
+*.userosscache
+*.suo
+appsettings.Development.json
+appsettings.Production.json
+
+# Node / Vite
+node_modules/
+dist/
+.env.local
+.env.*.local
+
+# Docker / IDE
+.vs/
+.idea/
+*.log

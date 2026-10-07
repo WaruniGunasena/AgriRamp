@@ -1,0 +1,42 @@
+services:
+  # 1. SQL Server Database Container
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: agristate_db
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourStrong@Password123
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql/data
+
+  # 2. .NET 8 Backend API Container
+  backend:
+    build:
+      context: ./AgriState_MiniTracker_backend
+      dockerfile: Dockerfile
+    container_name: agristate_backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=EstateInventoryDb;User Id=sa;Password=YourStrong@Password123;MultipleActiveResultSets=true;TrustServerCertificate=True;
+    ports:
+      - "5208:8080"
+    depends_on:
+      - sqlserver
+
+  # 3. React Frontend Container
+  frontend:
+    build:
+      context: ./AgriState_MiniTracker_frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_BASE_URL=http://localhost:5208/api
+    container_name: agristate_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  mssql_data:
