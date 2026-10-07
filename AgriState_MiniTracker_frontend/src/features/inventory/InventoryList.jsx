@@ -22,7 +22,7 @@ export const InventoryList = ({ items, onDelete, onResetFilters }) => {
             <th>Item Name</th>
             <th>Location</th>
             <th>Category</th>
-            <th>Quantity</th>
+            <th>Quantity In</th>
             <th>Unit</th>
             <th>Status</th>
             <th style={{ textAlign: 'right' }}>Actions</th>
