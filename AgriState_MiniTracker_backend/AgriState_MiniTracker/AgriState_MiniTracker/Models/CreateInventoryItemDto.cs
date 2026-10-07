@@ -22,6 +22,6 @@ namespace AgriState_MiniTracker.Models
         public string Unit { get; set; } = "Units";
 
         [Range(0, 999999)]
-        public decimal MinThreshold { get; set; } = 10.00m;
+        public decimal MinThreshold { get; set; } = 5.00m;
     }
 }
